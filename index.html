@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEDACUATRERA — 27.06.2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght=400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-deep: #050406;
+            --gold-poster: #d1a841; 
+            --text-white: #ffffff;
+            --text-muted: #88838e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-white);
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% 30%, rgba(209, 168, 65, 0.08) 0px, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.02) 0px, transparent 40%);
+        }
+
+        .main-wrapper {
+            max-width: 650px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px 16px 160px 16px;
+            text-align: center;
+        }
+
+        /* --- CONTENEDOR DE TÍTULO OPTIMIZADO PARA IPHONE --- */
+        .title-container {
+            position: relative;
+            margin-bottom: 65px;
+            padding: 20px 0;
+            width: 100%;
+        }
+
+        .main-title {
+            /* Forzamos tipografía sólida del sistema para evitar fallos de carga */
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            
+            /* Ajuste elástico perfecto para que quepa en cualquier pantalla sin cortarse */
+            font-size: clamp(2.3rem, 10.5vw, 5rem);
+            
+            line-height: 0.95;
+            text-transform: uppercase;
+            color: #ffffff;
+            display: block;
+            width: 100%;
+            letter-spacing: -0.5px;
+            
+            /* Inclinación y distorsión sutil estilo póster urbano */
+            transform: rotate(-3.5deg) skewX(-3deg);
+            
+            /* SOLUCIÓN AL BUG DE SAFARI: 
+               Eliminamos el -webkit-text-stroke que rompía la letra y creamos un contorno 
+               y sombra ultra-gruesos con text-shadow en bloque sólido negro. */
+            text-shadow: 
+                -2px -2px 0 #000,  1px -2px 0 #000, -2px  1px 0 #000,  1px  1px 0 #000,
+                -3px -3px 0 #000,  3px -3px 0 #000, -3px  3px 0 #000,  3px  3px 0 #000,
+                -4px  0px 0 #000,  4px  0px 0 #000,  0px -4px 0 #000,  0px  4px 0 #000,
+                 4px  4px 0px #000, 5px  5px 0px #000, 6px  6px 10px rgba(0,0,0,0.8);
+        }
+
+        /* Hashtag estilo sticker con caja recortada */
+        .lema-graffiti {
+            position: absolute;
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-size: clamp(0.85rem, 3.8vw, 1.25rem);
+            color: var(--gold-poster);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%) rotate(1deg);
+            background: #050406;
+            padding: 4px 14px;
+            border: 2px dashed rgba(209, 168, 65, 0.9);
+            white-space: nowrap;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 0px #000;
+            box-shadow: 3px 3px 0px #000;
+        }
+
+        /* --- LOGÍSTICA --- */
+        .event-info-box {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: clamp(0.9rem, 4.5vw, 1.1rem);
+            letter-spacing: 2px;
+            margin: 40px 0 20px 0;
+            border: 2px solid var(--text-white);
+            padding: 12px 25px;
+            display: inline-block;
+            background: rgba(0,0,0,0.8);
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .badges-row {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .badge-item {
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 6px 12px;
+            background: rgba(255,255,255,0.02);
+            white-space: nowrap;
+        }
+        .badge-item span {
+            color: var(--gold-poster);
+        }
+
+        /* --- CONTADOR --- */
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 30px 0;
+            width: 100%;
+        }
+
+        .countdown-box {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(211, 168, 65, 0.2);
+            padding: 10px;
+            flex: 1;
+            max-width: 90px;
+            min-width: 70px;
+        }
+
+        .countdown-num {
+            font-size: clamp(1.6rem, 6vw, 2.3rem);
+            font-weight: 700;
+            color: var(--gold-poster);
+            display: block;
+            line-height: 1;
+        }
+
+        .countdown-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* --- SECCIÓN CALENDARIO --- */
+        .calendar-section {
+            background: rgba(0, 0, 0, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 380px;
+            width: 100%;
+            margin: 35px auto 40px auto;
+            padding: 20px 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+        }
+
+        .calendar-month {
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold-poster);
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+            text-align: center;
+        }
+
+        .calendar-day-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            padding-bottom: 8px;
+        }
+
+        .calendar-day {
+            font-size: 0.95rem;
+            padding: 8px 0;
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 700;
+        }
+
+        .day-current-month {
+            color: var(--text-white);
+        }
+
+        .fase-active {
+            background: var(--gold-poster);
+            color: #000 !important;
+            font-weight: 700;
+        }
+
+        .calendar-legend {
+            margin-top: 15px;
+            font-size: 0.75rem;
+            display: flex;
+            justify-content: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            display: inline-block;
+        }
+
+        /* --- BOTÓN DE COMPRA --- */
+        .btn-vandal {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1rem;
+            letter-spacing: 3px;
+            color: #000;
+            background: var(--gold-poster);
+            border: none;
+            padding: 18px 40px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+            width: 90%;
+            max-width: 320px;
+            box-shadow: 0 5px 15px rgba(211, 168, 65, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-vandal:hover {
+            background: #fff;
+        }
+
+        /* --- INSTRUCCIONES --- */
+        .purchase-instructions {
+            max-width: 420px;
+            margin: 0 auto 50px auto;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--gold-poster);
+            text-align: left;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #e0e0e0;
+        }
+
+        .purchase-instructions p {
+            margin-bottom: 8px;
+        }
+
+        /* --- UBICACIÓN --- */
+        .footer-section {
+            margin-top: 20px;
+            border-top: 1px dashed rgba(211, 168, 65, 0.2);
+            padding-top: 40px;
+        }
+
+        .footer-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--gold-poster);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 250px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(211, 168, 65, 0.3);
+            background: #111;
+            filter: grayscale(1) invert(0.9) contrast(1.2);
+        }
+
+        .socials-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-link {
+            color: var(--text-white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: 1px solid rgba(211, 168, 65, 0.3);
+            padding: 12px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            max-width: 180px;
+            justify-content: center;
+        }
+
+        .social-link i {
+            color: var(--gold-poster);
+        }
+
+        /* --- MARQUESINA --- */
+        .ticket-ticker {
+            background: #000;
+            color: var(--gold-poster);
+            padding: 16px 0;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 99;
+            overflow: hidden;
+            white-space: nowrap;
+            border-top: 2px solid var(--gold-poster);
+        }
+
+        .ticker-wrap {
+            display: inline-block;
+            animation: ticker 28s linear infinite;
+        }
+
+        .ticker-item {
+            display: inline-block;
+            padding: 0 40px;
+        }
+
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+
+        @media (max-width: 400px) {
+            .socials-container { flex-direction: column; align-items: center; }
+            .social-link { width: 100%; max-width: 260px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-wrapper">
+        
+        <!-- HEADER SEGURO Y URBANIZADO PARA IPHONE -->
+        <div class="title-container">
+            <h1 class="main-title">PEDACUATRERA</h1>
+            <div class="lema-graffiti">#estavapordoñasoco</div>
+        </div>
+
+        <!-- LOGÍSTICA -->
+        <div>
+            <div class="event-info-box">📍 PABELLÓN ALTAVISTA</div>
+        </div>
+
+        <!-- REQUERIMIENTOS -->
+        <div class="badges-row">
+            <div class="badge-item"><span>✓</span> ALCOHOL INCLUIDO</div>
+            <div class="badge-item"><span>✓</span> CUPO LIMITADO</div>
+            <div class="badge-item">🔞 +18</div>
+        </div>
+
+        <!-- CUENTA REGRESIVA -->
+        <div class="countdown-container">
+            <div class="countdown-box">
+                <span class="countdown-num" id="days">00</span>
+                <span class="countdown-label">Días</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-num" id="hours">00</span>
+                <span class="countdown-label">Hrs</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-num" id="minutes">00</span>
+                <span class="countdown-label">Min</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-num" id="seconds">00</span>
+                <span class="countdown-label">Seg</span>
+            </div>
+        </div>
+
+        <!-- CALENDARIO DE RESERVA -->
+        <div class="calendar-section">
+            <div class="calendar-month">
+                <i class="fa-regular fa-calendar-days"></i> JUNIO 2026
+            </div>
+            <div class="calendar-grid">
+                <div class="calendar-day-label">Lu</div>
+                <div class="calendar-day-label">Ma</div>
+                <div class="calendar-day-label">Mi</div>
+                <div class="calendar-day-label">Ju</div>
+                <div class="calendar-day-label">Vi</div>
+                <div class="calendar-day-label">Sá</div>
+                <div class="calendar-day-label">Do</div>
+
+                <div class="calendar-day day-current-month">1</div>
+                <div class="calendar-day day-current-month">2</div>
+                <div class="calendar-day day-current-month">3</div>
+                <div class="calendar-day day-current-month">4</div>
+                <div class="calendar-day day-current-month">5</div>
+                <div class="calendar-day day-current-month">6</div>
+                <div class="calendar-day day-current-month">7</div>
+                
+                <div class="calendar-day day-current-month fase-active">8</div>
+                <div class="calendar-day day-current-month fase-active">9</div>
+                <div class="calendar-day day-current-month fase-active">10</div>
+                <div class="calendar-day day-current-month fase-active">11</div>
+                <div class="calendar-day day-current-month fase-active">12</div>
+                <div class="calendar-day day-current-month fase-active">13</div>
+                <div class="calendar-day day-current-month fase-active">14</div>
+                <div class="calendar-day day-current-month fase-active">15</div>
+
+                <div class="calendar-day day-current-month">16</div>
+                <div class="calendar-day day-current-month">17</div>
+                <div class="calendar-day day-current-month">18</div>
+                <div class="calendar-day day-current-month">19</div>
+                <div class="calendar-day day-current-month">20</div>
+                <div class="calendar-day day-current-month">21</div>
+                <div class="calendar-day day-current-month">22</div>
+                <div class="calendar-day day-current-month">23</div>
+                <div class="calendar-day day-current-month">24</div>
+                <div class="calendar-day day-current-month">25</div>
+                <div class="calendar-day day-current-month">26</div>
+                <div class="calendar-day day-current-month">27</div>
+                <div class="calendar-day day-current-month">28</div>
+                <div class="calendar-day day-current-month">29</div>
+                <div class="calendar-day day-current-month">30</div>
+            </div>
+            <div class="calendar-legend">
+                <div class="legend-item">
+                    <span class="legend-color" style="background: var(--gold-poster);"></span>
+                    <span>Preventa Fase 1 ($149)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMPRA -->
+        <a href="https://mpago.la/2Wg9qmJ" target="_blank" class="btn-vandal">Adquirir Preventa</a>
+
+        <!-- INDICACIONES -->
+        <div class="purchase-instructions">
+            <p>📝 <strong>Importante:</strong> Al realizar tu compra, asegúrate de <strong>escribir correctamente tus datos</strong> en el formulario de pago.</p>
+            <p>✉️ Una vez procesado el pago, te enviaremos una <strong>confirmación directa al correo electrónico</strong> que registraste.</p>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer-section">
+            <div class="footer-title">UBICACIÓN Y COMUNIDAD</div>
+            
+            <div class="map-container">
+                <iframe 
+                    src="https://maps.google.com/maps?q=Pabellon%20Altavista,%20CDMX&t=&z=16&ie=UTF8&iwloc=B&output=embed" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+
+            <div class="socials-container">
+                <a href="https://www.instagram.com/pedacuatrera/" target="_blank" class="social-link">
+                    <i class="fa-brands fa-instagram"></i> Instagram
+                </a>
+                <a href="https://www.tiktok.com/@peda.cuatrera" target="_blank" class="social-link">
+                    <i class="fa-brands fa-tiktok"></i> TikTok
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- MARQUESINA -->
+    <div class="ticket-ticker">
+        <div class="ticker-wrap">
+            <div class="ticker-item">PRIMERA FASE: $149 MXN</div>
+            <div class="ticker-item">• VÁLIDO DEL 8 AL 15 DE JUNIO</div>
+            <div class="ticker-item">• SOLO LOS PRIMEROS 150 BOLETOS</div>
+            <div class="ticker-item">• HORARIO: 9 PM HASTA LAS 3 AM</div>
+            <div class="ticker-item">• DISPONIBLES: 150 / 150</div>
+            
+            <div class="ticker-item">PRIMERA FASE: $149 MXN</div>
+            <div class="ticker-item">• VÁLIDO DEL 8 AL 15 DE JUNIO</div>
+            <div class="ticker-item">• SOLO LOS PRIMEROS 150 BOLETOS</div>
+            <div class="ticker-item">• HORARIO: 9 PM HASTA LAS 3 AM</div>
+            <div class="ticker-item">• DISPONIBLES: 150 / 150</div>
+        </div>
+    </div>
+
+    <script>
+        const targetDate = new Date("2026-06-27T22:00:00-06:00").getTime();
+
+        const countdown = () => {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference < 0) {
+                document.querySelector(".countdown-container").innerHTML = "<div style='font-weight:bold; letter-spacing:2px;'>EL ACCESO HA COMENZADO</div>";
+                return;
+            }
+
+            const d = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById("days").textContent = d < 10 ? "0" + d : d;
+            document.getElementById("hours").textContent = h < 10 ? "0" + h : h;
+            document.getElementById("minutes").textContent = m < 10 ? "0" + m : m;
+            document.getElementById("seconds").textContent = s < 10 ? "0" + s : s;
+        };
+
+        setInterval(countdown, 1000);
+        countdown();
+    </script>
+</body>
+</html>
